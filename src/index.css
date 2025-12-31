@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
+  html, body {
+    @apply overflow-y-scroll; 
+    -ms-overflow-style: none; 
+    scrollbar-width: none;    
+  }
+}
+
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+
+.main {
+  @apply overflow-y-scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.main::-webkit-scrollbar {
+  display: none;
+}
+
+.table-content {
+   @apply overflow-x-scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.table-content::-webkit-scrollbar{
+  display:none;
+}
