@@ -61,7 +61,6 @@ const WeatherApp = () => {
   }
 
   const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
-  console.log(API_KEY);
 
   const getweatherData = async (cityName) => {
     if (loading) return;
