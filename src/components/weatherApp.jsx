@@ -60,35 +60,37 @@ const WeatherApp = () => {
     return dates;
   }
 
-  const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
+ const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
 
-  const getweatherData = async (cityName) => {
-    if (loading) return;
+const getweatherData = async (cityName) => {
+  if (loading) return;
 
-    setLoading(true);
-    setError(null);
-    const url = `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${cityName}&days=7&aqi=no&alerts=no`;
-   
+  setLoading(true);
+  setError(null);
 
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(
-          `HTTP error ${response.status}: ${errorText.substring(0, 50)}...`
-        );
-      }
+  const url = `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${cityName}&days=7&aqi=no&alerts=no`;
 
-      const result = await response.json();
-      setWeatherData(result);
-      console.log(result);
-    } catch (err) {
-      console.error("Weather Fetch Error:", err);
-      setError(err.message || "An unknown network error occurred.");
-    } finally {
-      setLoading(false);
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(
+        `HTTP error ${response.status}: ${errorText.substring(0, 50)}...`
+      );
     }
-  };
+
+    const result = await response.json();
+    setWeatherData(result);
+    console.log(result);
+  } catch (err) {
+    console.error("Weather Fetch Error:", err);
+    setError(err.message || "Network error");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   useEffect(() => {
     if (!city) return;
